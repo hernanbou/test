@@ -25,21 +25,10 @@ const Catalog = () => {
     const [totalPage, setTotalPage] = useState(0);
     const [display, setDisplay] = useState(true);
     const [filter, setFilter] = useState('')
-    const [filterActive, setFilterActive] = useState(false)
-    const [popularMovies, setPopularMovies] = useState(false)
-
-
-    const handlePopular = () => {
-        setPopularMovies(!popularMovies);
-    };
 
     const handleFilter = (cate) => {
-        if (cate === 'all') {
-            return setFilterActive(false);
-        } else {
-            setFilterActive(true);
-            setFilter(cate);
-        }
+        setFilter(cate);
+        getFilter(filter);
     };
 
     const getMovies = async () => {
@@ -79,15 +68,6 @@ const Catalog = () => {
     };
 
     const getCatalog = () => {
-
-        if (filterActive) {
-            getFilter(filter);
-            console.log(movieItems)
-        }
-        if (popularMovies) {
-            getMovies();
-            console.log(movieItems)
-        }
 
         return movieItems.map((item, i) => (
             <CatalogMovieCard
@@ -131,7 +111,7 @@ const Catalog = () => {
                     </FilterCategory>
                     <PinkButton
                         text='mais populares'
-                        handleClick={() => { handlePopular() }}
+                        handleClick={() => { getMovies() }}
                     />
                 </Display>
                 {
