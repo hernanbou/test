@@ -57,7 +57,7 @@ export const category = [
     },
     {
         id: 878,
-        name: "sci-Fi",
+        name: "sci-fi",
         cateURL: '&with_genres=878'
     },
     {

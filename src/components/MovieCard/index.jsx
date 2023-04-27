@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
@@ -9,26 +8,14 @@ import {
     Rate,
 } from './styled';
 
-import tmdbApi from '../../api/tmdbApi';
 import apiConfig from '../../api/apiConfig';
 import star from '../../assets/star.svg'
 
 
 
-export const MovieCard = ({ movieID }) => {
+export const MovieCard = ({ movieInfo }) => {
 
-    const [movieInfo, setMovieInfo] = useState({});
-
-    const link = 'movie/' + movieID;
-
-    const getDetail = async () => {
-        const response = await tmdbApi.detail(movieID, { params: {} });
-        setMovieInfo(response)
-    }
-
-    useEffect(() => {
-        getDetail();
-    }, [])
+    const link = 'movie/' + movieInfo.id;
 
     return (
         <Container>

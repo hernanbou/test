@@ -74,7 +74,7 @@ const Carousel = () => {
                     {
                         movieItems.map((item, i) => (
                             <SwiperSlide key={i} >
-                                <MovieCard movieID={item.id} />
+                                <MovieCard movieInfo={item} />
                             </SwiperSlide>
                         ))
                     }

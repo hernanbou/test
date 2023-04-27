@@ -17,19 +17,10 @@ import star from '../../assets/star.svg'
 
 
 
-export const CatalogMovieCard = ({ movieID }) => {
+export const CatalogMovieCard = ({ movieInfo }) => {
 
-    const [movieInfo, setMovieInfo] = useState({});
-    const link = 'movie/' + movieID;
+    const link = 'movie/' + movieInfo.id;
 
-    const getDetail = async () => {
-        const response = await tmdbApi.detail(movieID, { params: {} });
-        setMovieInfo(response)
-    }
-
-    useEffect(() => {
-        getDetail();
-    }, [])
 
     return (
         <Container >

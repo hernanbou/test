@@ -24,12 +24,7 @@ const Catalog = () => {
     const [page, setPage] = useState(1);
     const [totalPage, setTotalPage] = useState(0);
     const [display, setDisplay] = useState(true);
-    const [filter, setFilter] = useState('')
 
-    const handleFilter = (cate) => {
-        setFilter(cate);
-        getFilter(filter);
-    };
 
     const getMovies = async () => {
         const params = {};
@@ -46,12 +41,15 @@ const Catalog = () => {
         const params = {};
         try {
             const response = await tmdbApi.getFilteredMovie(type, { params });
+            console.log(type);
             setMovieItems(response.results.slice(0, 6));
             setTotalPage(response.total_pages);
         } catch {
             console.log('error');
         }
     };
+
+    console.log(movieItems);
 
     const loadMore = async () => {
         const params = {
@@ -67,15 +65,15 @@ const Catalog = () => {
 
     };
 
-    const getCatalog = () => {
+    // const getCatalog = () => {
 
-        return movieItems.map((item, i) => (
-            <CatalogMovieCard
-                key={i}
-                movieID={item.id}
-            />
-        ))
-    }
+    //     return movieItems.map((item, i) => (
+    //         <CatalogMovieCard
+    //             key={i}
+    //             movieID={item.id}
+    //         />
+    //     ))
+    // }
 
     useEffect(() => {
         getMovies();
@@ -90,7 +88,7 @@ const Catalog = () => {
             <ControlPanel>
                 <Display>
                     <FilterCategory
-                        onChange={elem => handleFilter(elem.target.value)}
+                        onChange={elem => getFilter(elem.target.value)}
                         defaultValue="placeholder"
                     >
                         <option value="placeholder" disabled>
@@ -131,7 +129,14 @@ const Catalog = () => {
                 }
             </ControlPanel>
             <Content list={display}>
-                {getCatalog()}
+                {
+                    movieItems.map((item, i) => (
+                        <CatalogMovieCard
+                            key={i}
+                            movieInfo={item}
+                        />
+                    ))
+                }
             </Content>
             {
                 page < totalPage ? (
