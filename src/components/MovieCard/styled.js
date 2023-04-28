@@ -65,23 +65,14 @@ export const Title = styled.h2`
     cursor: pointer;
 `
 export const Genres = styled.div`
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    width: 100%;
     font-weight: 300;
     line-height: 24px;
     color:var(--pink);
-
-    span{
-        &:after{
-            content: ", "
-            }
-        &:last-child{
-            &:after{
-                content: ""
-                }
-        }
-    } 
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 `
 export const Rate = styled.div`
     position: relative;
