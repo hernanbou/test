@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { CatalogMovieCard } from '../../components/CatalogMovieCard';
 import PinkButton from '../../components/PinkButton';
-import tmdbApi, { category } from '../../api/tmdbApi';
+import tmdbApi, { movieType, category } from '../../api/tmdbApi';
 
 
 import {
@@ -24,12 +24,19 @@ const Catalog = () => {
     const [page, setPage] = useState(1);
     const [totalPage, setTotalPage] = useState(0);
     const [display, setDisplay] = useState(true);
+    const [activeFilter, setActiveFilter] = useState(false);
+    const [filterCategory, setFilterCategory] = useState('')
 
+    const handleFilterCategory = (type) => {
+
+        setFilterCategory(type);
+        getFilter(type);
+    };
 
     const getMovies = async () => {
         const params = {};
         try {
-            const response = await tmdbApi.getMoviesList({ params });
+            const response = await tmdbApi.getMoviesList(movieType.popular, { params });
             setMovieItems(response.results.slice(0, 6));
             setTotalPage(response.total_pages);
         } catch {
@@ -38,42 +45,68 @@ const Catalog = () => {
     };
 
     const getFilter = async (type) => {
-        const params = {};
-        try {
-            const response = await tmdbApi.getFilteredMovie(type, { params });
-            console.log(type);
-            setMovieItems(response.results.slice(0, 6));
-            setTotalPage(response.total_pages);
-        } catch {
-            console.log('error');
+
+        let params = {};
+
+        if (type === 'all') {
+            try {
+                const response = await tmdbApi.getMoviesList(movieType.top_rated, { params });
+                setMovieItems(response.results.slice(0, 6));
+                setTotalPage(response.total_pages);
+            } catch {
+                console.log('error');
+            }
+        } else {
+
+            try {
+                const response = await tmdbApi.getFilteredMovie(type, { params });
+                setMovieItems(response.results.slice(0, 6));
+                setTotalPage(response.total_pages);
+            } catch {
+                console.log('error');
+            }
         }
     };
 
-    console.log(movieItems);
 
     const loadMore = async () => {
-        const params = {
+
+        let params = {
             page: page + 1
         };
-        try {
-            const response = await tmdbApi.getMoviesList({ params });
-            setMovieItems([...movieItems, ...response.results.slice(0, 6)]);
-            setPage(page + 1);
-        } catch {
-            console.log('error');
+
+        if (activeFilter) {
+            let filter = filterCategory;
+
+            if (filter === 'all') {
+                try {
+                    const response = await tmdbApi.getMoviesList(movieType.top_rated, { params });
+                    setMovieItems([...movieItems, ...response.results.slice(0, 6)]);
+                    setPage(page + 1);
+                } catch {
+                    console.log('error');
+                }
+            } else {
+
+                try {
+                    const response = await tmdbApi.getFilteredMovie(filter, { params });
+                    setMovieItems([...movieItems, ...response.results.slice(0, 6)]);
+                    setPage(page + 1);
+                } catch {
+                    console.log('error');
+                }
+            }
+
+        } else {
+            try {
+                const response = await tmdbApi.getMoviesList(movieType.popular, { params });
+                setMovieItems([...movieItems, ...response.results.slice(0, 6)]);
+                setPage(page + 1);
+            } catch {
+                console.log('error');
+            }
         }
-
     };
-
-    // const getCatalog = () => {
-
-    //     return movieItems.map((item, i) => (
-    //         <CatalogMovieCard
-    //             key={i}
-    //             movieID={item.id}
-    //         />
-    //     ))
-    // }
 
     useEffect(() => {
         getMovies();
@@ -88,7 +121,8 @@ const Catalog = () => {
             <ControlPanel>
                 <Display>
                     <FilterCategory
-                        onChange={elem => getFilter(elem.target.value)}
+                        onChange={elem => handleFilterCategory(elem.target.value)}
+                        onClick={() => setActiveFilter(true)}
                         defaultValue="placeholder"
                     >
                         <option value="placeholder" disabled>
@@ -109,7 +143,7 @@ const Catalog = () => {
                     </FilterCategory>
                     <PinkButton
                         text='mais populares'
-                        handleClick={() => { getMovies() }}
+                        handleClick={() => { getMovies(); setActiveFilter(false) }}
                     />
                 </Display>
                 {
@@ -134,6 +168,7 @@ const Catalog = () => {
                         <CatalogMovieCard
                             key={i}
                             movieInfo={item}
+                            list={display}
                         />
                     ))
                 }
@@ -147,7 +182,7 @@ const Catalog = () => {
                     />
                 ) : null
             }
-        </Container>
+        </Container >
     )
 }
 

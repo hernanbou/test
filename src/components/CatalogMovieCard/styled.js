@@ -4,7 +4,7 @@ import play from '../../assets/play.svg'
 export const Container = styled.div`
     position: relative;
     margin-top: 5px;
-    width: 100%;
+    width: ${props => props.display ? '494.25px' : '100%'};
     height: 251px;
     display: flex;
 `
@@ -68,23 +68,14 @@ export const Title = styled.h2`
     cursor: pointer;
 `
 export const Genres = styled.div`
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    width: 100%;
     font-weight: 300;
     line-height: 24px;
     color:var(--pink);
-
-    span{
-        &:after{
-            content: ", "
-            }
-        &:last-child{
-            &:after{
-                content: ""
-                }
-        }
-    } 
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 `
 export const Rate = styled.div`
     position: relative;

@@ -54,7 +54,7 @@ const SingleMovie = () => {
             {item && (
                 <Container>
                     <Main>
-                        <Poster src={apiConfig.w500Image(item.poster_path)} alt="" />
+                        <Poster src={apiConfig.w500Image(item.poster_path || item.backdrop_path)} alt="" />
                         <Content>
                             <h2>{item.title || item.name}</h2>
                             <Info>

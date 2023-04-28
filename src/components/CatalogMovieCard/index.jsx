@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
@@ -11,22 +10,31 @@ import {
     Overview
 } from './styled';
 
-import tmdbApi from '../../api/tmdbApi';
 import apiConfig from '../../api/apiConfig';
+import { category } from '../../api/tmdbApi';
+
 import star from '../../assets/star.svg'
 
+export const CatalogMovieCard = ({ movieInfo, list }) => {
 
+    const getCategoryName = (categoryId) => {
+        const categoryName = category.find(category => category.id === categoryId)
+        return categoryName?.name || ""
+    };
 
-export const CatalogMovieCard = ({ movieInfo }) => {
+    const categoryName = (cateID) => {
+        const cateName = cateID.map(getCategoryName)
+        return cateName
+    };
 
     const link = 'movie/' + movieInfo.id;
 
 
     return (
-        <Container >
+        <Container display={list}>
             <Link to={link}>
                 <Poster >
-                    <img src={apiConfig.w500Image(movieInfo.poster_path)} alt="" />
+                    <img src={apiConfig.w500Image(movieInfo.poster_path || movieInfo.backdrop_path)} alt="" />
                 </Poster>
             </Link>
             <Info >
@@ -35,9 +43,7 @@ export const CatalogMovieCard = ({ movieInfo }) => {
                 </Link>
                 <Genres >
                     {
-                        movieInfo.genres && movieInfo.genres.map((genres, i) => (
-                            <span key={i}>{genres.name}</span>
-                        ))
+                        categoryName(movieInfo.genre_ids).join(", ")
                     }
                 </Genres>
                 <Rate >

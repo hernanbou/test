@@ -4,76 +4,96 @@ import apiConfig from './apiConfig';
 
 const api_key = `api_key=${apiConfig.apiKey}`;
 
+export const movieType = {
+    popular: 'popular',
+    top_rated: 'top_rated'
+}
+
 export const category = [
     {
         id: 12,
-        name: "adventure",
+        name: "Adventure",
         cateURL: '&with_genres=12'
     },
     {
         id: 14,
-        name: "fantasy",
+        name: "Fantasy",
         cateURL: '&with_genres=14'
     },
     {
         id: 16,
-        name: "animation",
+        name: "Animation",
         cateURL: '&with_genres=16'
     },
     {
         id: 18,
-        name: "drama",
+        name: "Drama",
         cateURL: '&with_genres=18'
     },
     {
         id: 27,
-        name: "horror",
+        name: "Horror",
         cateURL: '&with_genres=27'
     },
     {
         id: 28,
-        name: "action",
+        name: "Action",
         cateURL: '&with_genres=28'
     },
     {
         id: 35,
-        name: "comedy",
+        name: "Comedy",
         cateURL: '&with_genres=35'
     },
     {
+        id: 36,
+        name: "History",
+        cateURL: '&with_genres=36'
+    },
+    {
         id: 53,
-        name: "thriller",
+        name: "Thriller",
         cateURL: '&with_genres=53'
     },
     {
         id: 80,
-        name: "crime",
+        name: "Crime",
         cateURL: '&with_genres=80'
     },
     {
         id: 99,
-        name: 'documentary',
+        name: "Documentary",
         cateURL: '&with_genres=99'
     },
     {
         id: 878,
-        name: "sci-fi",
+        name: "Sci-Fi",
         cateURL: '&with_genres=878'
     },
     {
         id: 9648,
-        name: "mystery",
+        name: "Mystery",
         cateURL: '&with_genres=9648'
     },
     {
+        id: 10402,
+        name: "Music",
+        cateURL: '&with_genres=10402'
+    },
+    {
         id: 10751,
-        name: "family",
+        name: "Family",
         cateURL: '&with_genres=10751'
     },
     {
         id: 10752,
-        name: "war",
+        name: "War",
         cateURL: '&with_genres=10752'
+    },
+    {
+        id: 10749,
+        name: "Romance",
+        cateURL: '&with_genres=10749'
     },
 ]
 
@@ -82,8 +102,8 @@ const tmdbApi = {
         const url = '/trending/movie/week';
         return axiosClient.get(url, params);
     },
-    getMoviesList: (params) => {
-        const url = 'movie/popular';
+    getMoviesList: (type, params) => {
+        const url = 'movie/' + movieType[type];
         return axiosClient.get(url, params);
     },
     getVideos: (id) => {

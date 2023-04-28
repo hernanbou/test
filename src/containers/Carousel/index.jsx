@@ -11,7 +11,7 @@ import LArrow from '../../assets/l_arrow.svg'
 import RArrow from '../../assets/r_arrow.svg'
 
 import { MovieCard } from '../../components/MovieCard';
-import tmdbApi, { category } from '../../api/tmdbApi';
+import tmdbApi from '../../api/tmdbApi';
 
 
 const Carousel = () => {
