@@ -1,12 +1,29 @@
-import { Container } from './styled'
+import { OpenSearch, Container, Content } from './styled'
 
-import search from "../../assets/search.svg";
-// import searchActive from '../../assets/searchActive.svg';
+import mglass from "../../assets/search.svg";
+import mglassActive from '../../assets/searchActive.svg';
+import { useState } from 'react';
+
+
 
 const Search = () => {
+
+  const [active, setActive] = useState(false)
+
   return (
     <Container>
-      <img src={search} alt="Search" />
+      <OpenSearch
+        onClick={() => setActive(!active)}
+      >
+        {
+          active === true ?
+            <img src={mglassActive} alt="Search" /> :
+            <img src={mglass} alt="Search" />
+        }
+      </OpenSearch>
+      <Content open={active}>
+
+      </Content>
     </Container>
   );
 }

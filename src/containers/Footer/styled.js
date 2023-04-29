@@ -1,0 +1,12 @@
+import styled from 'styled-components';
+
+export const Container = styled.div`
+    background: #18181C;
+    height: 112px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 300;
+`;

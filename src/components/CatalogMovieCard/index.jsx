@@ -47,7 +47,7 @@ export const CatalogMovieCard = ({ movieInfo, list }) => {
                     }
                 </Genres>
                 <Rate >
-                    <img src={star} alt="" />
+                    <img src={star} alt="pink star" />
                     <p>
                         {movieInfo.vote_average?.toFixed(1)}
                     </p>

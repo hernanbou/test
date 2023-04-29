@@ -5,6 +5,7 @@ export const Container = styled.ul`
     position: relative;
     display: flex;
     gap:62px;
+    z-index: 999;
 
     @media ${device.breakpoint}{
         flex-flow:column nowrap;

@@ -16,6 +16,7 @@ export const Poster = styled.section`
     height: 231.74px;
     border-radius: 4px;
     transition: all 0.3s ease-in;
+    
     &:hover{
         background-color: var(--pink);
         img{
