@@ -4,6 +4,7 @@ import {
     Container,
     Poster,
     Info,
+    Title,
     Genres,
     Rate
 } from './styled'
@@ -36,7 +37,7 @@ const SearchMovieCard = ({ movieInfo }) => {
                     <img src={apiConfig.w500Image(movieInfo.poster_path || movieInfo.backdrop_path)} alt="" />
                 </Poster>
                 <Info>
-                    <h2>{movieInfo.title || movieInfo.name}</h2>
+                    <Title>{movieInfo.title || movieInfo.name}</Title>
                     <Genres>
                         {
                             categoryName(movieInfo.genre_ids).join(", ")

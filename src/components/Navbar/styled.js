@@ -8,18 +8,24 @@ export const Container = styled.ul`
     z-index: 999;
 
     @media ${device.breakpoint}{
-        flex-flow:column nowrap;
-        background-color: var(--background);
-        position: fixed;
-        transform: ${props => props.open ? 'translateX(0)' : 'translateX(-100%)'};
-        transition: all 0.3s;
         top: 107px;
         left: 0;
         height: 100vh;
         width: 40vw;
+
+        position: fixed;
+
+        background-color: var(--background);
+        border-top: 2px solid var(--background-page);
+
         padding-top: 107px;
         padding-left: 10px;
+        
         gap:100px;
+        
+        flex-flow:column nowrap;
+        transform: ${props => props.open ? 'translateX(0)' : 'translateX(-100%)'};
+        transition: all 0.3s;
     }
 
     li{

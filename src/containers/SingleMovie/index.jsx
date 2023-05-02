@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import tmdbApi from '../../api/tmdbApi';
 import apiConfig from '../../api/apiConfig';
@@ -83,7 +83,9 @@ const SingleMovie = () => {
                             <h3>Trailer</h3>
                         </Header>
                         <Frame src={trailerBaseUrl + (video.length ? video[0].key : '')} />
-                        <PinkButton isCenter={true} text='voltar' />
+                        <Link to='/'>
+                            <PinkButton isCenter={true} text='voltar' />
+                        </Link>
                     </Trailer>
                 </Container>
             )}

@@ -17,7 +17,7 @@ const Header = () => {
             <Logo><h2>suno<span>movies</span></h2></Logo>
             <Content>
                 <Navbar isOpen={openMenu} />
-                <Search />
+                <Search isOpen={openMenu} />
             </Content>
         </Container>
     );
