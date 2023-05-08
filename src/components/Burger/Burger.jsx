@@ -1,10 +1,15 @@
+import { useContext } from 'react'
+
 import { Container } from './styled'
 
+import { MoviesContext } from '../../contexts/MoviesContext'
 
-const Burger = ({ isOpen, openMenuClickEvent }) => {
+
+const Burger = ({ openMenuClickEvent }) => {
+    const { openMenu } = useContext(MoviesContext);
 
     return (
-        <Container open={isOpen} onClick={openMenuClickEvent}>
+        <Container open={openMenu} onClick={openMenuClickEvent}>
             <span />
             <span />
             <span />

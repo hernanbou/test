@@ -1,4 +1,7 @@
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+
+import { MoviesContext } from '../../contexts/MoviesContext';
 
 import {
     Container,
@@ -9,21 +12,12 @@ import {
 } from './styled';
 
 import apiConfig from '../../api/apiConfig';
-import { category } from '../../api/tmdbApi';
 
 import star from '../../assets/star.svg'
 
 export const MovieCard = ({ movieInfo }) => {
 
-    const getCategoryName = (categoryId) => {
-        const categoryName = category.find(category => category.id === categoryId)
-        return categoryName?.name || ""
-    };
-
-    const categoryName = (cateID) => {
-        const cateName = cateID.map(getCategoryName)
-        return cateName
-    };
+    const { categoryName } = useContext(MoviesContext);
 
     const link = 'movie/' + movieInfo.id;
 

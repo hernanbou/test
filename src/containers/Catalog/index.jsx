@@ -1,7 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+
+import { MoviesContext } from '../../contexts/MoviesContext';
 
 import { CatalogMovieCard } from '../../components/CatalogMovieCard';
 import PinkButton from '../../components/PinkButton';
+import { windowResize } from '../../utils/windowResize';
+
 import tmdbApi, { movieType, category } from '../../api/tmdbApi';
 
 
@@ -14,24 +18,27 @@ import {
     Button,
     FilterCategory,
 } from './styled';
+
 import dot from '../../assets/dot.svg'
 import DArrow from '../../assets/d_arrow.svg'
 
 
 const Catalog = () => {
 
-    const [movieItems, setMovieItems] = useState([]);
-    const [page, setPage] = useState(1);
-    const [totalPage, setTotalPage] = useState(0);
     const [display, setDisplay] = useState(true);
-    const [activeFilter, setActiveFilter] = useState(false);
-    const [filterCategory, setFilterCategory] = useState('')
+    const { screenWidth, breakpoint } = windowResize();
+    const {
+        loadMore,
+        handleFilterCategory,
+        page,
+        setActiveFilter,
+        totalPage,
+        setTotalPage,
+        movieItems,
+        setMovieItems
+    } = useContext(MoviesContext);
 
-    const handleFilterCategory = (type) => {
 
-        setFilterCategory(type);
-        getFilter(type);
-    };
 
     const getMovies = async () => {
         const params = {};
@@ -44,72 +51,9 @@ const Catalog = () => {
         }
     };
 
-    const getFilter = async (type) => {
-
-        let params = {};
-
-        if (type === 'all') {
-            try {
-                const response = await tmdbApi.getMoviesList(movieType.top_rated, { params });
-                setMovieItems(response.results.slice(0, 6));
-                setTotalPage(response.total_pages);
-            } catch {
-                console.log('error');
-            }
-        } else {
-
-            try {
-                const response = await tmdbApi.getFilteredMovie(type, { params });
-                setMovieItems(response.results.slice(0, 6));
-                setTotalPage(response.total_pages);
-            } catch {
-                console.log('error');
-            }
-        }
-    };
-
-
-    const loadMore = async () => {
-
-        let params = {
-            page: page + 1
-        };
-
-        if (activeFilter) {
-            let filter = filterCategory;
-
-            if (filter === 'all') {
-                try {
-                    const response = await tmdbApi.getMoviesList(movieType.top_rated, { params });
-                    setMovieItems([...movieItems, ...response.results.slice(0, 6)]);
-                    setPage(page + 1);
-                } catch {
-                    console.log('error');
-                }
-            } else {
-
-                try {
-                    const response = await tmdbApi.getFilteredMovie(filter, { params });
-                    setMovieItems([...movieItems, ...response.results.slice(0, 6)]);
-                    setPage(page + 1);
-                } catch {
-                    console.log('error');
-                }
-            }
-
-        } else {
-            try {
-                const response = await tmdbApi.getMoviesList(movieType.popular, { params });
-                setMovieItems([...movieItems, ...response.results.slice(0, 6)]);
-                setPage(page + 1);
-            } catch {
-                console.log('error');
-            }
-        }
-    };
-
     useEffect(() => {
         getMovies();
+        if (screenWidth <= breakpoint) setDisplay(false);
     }, []);
 
     return (
@@ -147,15 +91,15 @@ const Catalog = () => {
                     />
                 </Display>
                 {
-                    display === true ?
+                    display ?
                         <Button
-                            onClick={() => setDisplay(false)}
+                            onClick={() => setDisplay(!display)}
                         >
                             <img src={DArrow} alt="" />
                             <span>em grid</span>
                         </Button> :
                         <Button
-                            onClick={() => setDisplay(true)}
+                            onClick={() => setDisplay(!display)}
                         >
                             <img src={DArrow} alt="" />
                             <span>em lista</span>

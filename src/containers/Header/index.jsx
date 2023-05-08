@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useContext } from 'react';
 
 import { Container, Logo, Content } from './styled';
+
+import { MoviesContext } from '../../contexts/MoviesContext';
 
 import Search from '../../components/Search/index'
 import Burger from "../../components/Burger/Burger";
@@ -8,16 +10,18 @@ import Navbar from "../../components/Navbar/Navbar";
 
 
 
+
 const Header = () => {
-    const [openMenu, setOpenMenu] = useState(false);
+
+    const { openMenu, setOpenMenu, setOpenSearchBar } = useContext(MoviesContext);
 
     return (
         <Container>
-            <Burger isOpen={openMenu} openMenuClickEvent={() => setOpenMenu(!openMenu)} />
+            <Burger openMenuClickEvent={() => { setOpenMenu(!openMenu); setOpenSearchBar(false) }} />
             <Logo><h2>suno<span>movies</span></h2></Logo>
             <Content>
-                <Navbar isOpen={openMenu} />
-                <Search isOpen={openMenu} />
+                <Navbar />
+                <Search />
             </Content>
         </Container>
     );

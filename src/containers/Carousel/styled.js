@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import cine from '../../assets/cine.png'
-import { device } from '../../styles/responsive';
+import { device } from '../../utils/responsive';
 
 export const Container = styled.div`
     position: relative;
     width: 100%;
     height: 715px;
     background-image: url(${cine});
+    background-position: center;
     background-repeat:no-repeat;
     background-size: cover;
     border-bottom: 3px solid var(--pink);

@@ -25,10 +25,10 @@ const SingleMovie = () => {
 
     const { id } = useParams();
 
-    const [item, setItem] = useState(null);
+    const [item, setItem] = useState([]);
     const [video, setVideo] = useState([]);
 
-    const trailerBaseUrl = "https://www.youtube.com/embed/"
+    const trailerBaseUrl = "https://www.youtube.com/embed/";
 
     const getDetail = async () => {
         const response = await tmdbApi.detail(id, { params: {} });

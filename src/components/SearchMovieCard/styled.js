@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { device } from '../../styles/responsive'
+import { device } from '../../utils/responsive'
 
 export const Container = styled.div`
     width: 302px;    

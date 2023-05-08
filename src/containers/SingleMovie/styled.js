@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import cine from '../../assets/cine.png'
-import { device } from '../../styles/responsive'
+import { device } from '../../utils/responsive'
 
 export const Container = styled.div`
     width: 100%;
@@ -12,6 +12,7 @@ export const Main = styled.div`
     height: 100%;
     padding: 116px 446px;
     background-image: url(${cine});
+    background-position: center;
     background-repeat:no-repeat;
     background-size: cover;
 
@@ -19,29 +20,37 @@ export const Main = styled.div`
     gap: 64px;
 
     @media ${device.breakpoint}{
-        height: 100%;
-
-        background: none;
-
-        padding: 0px 22px;
-        gap: 27px;
+        height: 100%;        
 
         flex-direction: column;
         align-items: center;
-    }
+    };
+
+    @media ${device.mobile}{
+        background: none;
+        gap: 27px;
+        padding: 0px 22px;
+    };
+    @media ${device.tablet}{
+        padding: 0px 120px;
+    };
 `;
 
 export const Poster = styled.img`
-    
     width: 334px;
     height: 494px;
 
     @media ${device.breakpoint} {
-
         padding-top: 47px;
+    }
+    @media ${device.mobile}{
         width: 318px;
         height: 470px;
-    }
+    };
+    @media ${device.tablet}{
+        width: 450px;
+        height: 700px;
+    };
 `;
 
 export const Content = styled.main`
@@ -207,7 +216,7 @@ export const Frame = styled.iframe`
     height: 579px;
     border: none;
 
-    @media ${device.breakpoint}{
+    @media ${device.mobile}{
         height: 200px;
     }
 `;
