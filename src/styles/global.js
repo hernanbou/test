@@ -17,11 +17,12 @@ export const GlobalStyle = createGlobalStyle`
 
 ::-webkit-scrollbar{
     width: 15px;
-    
 }
+
 ::-webkit-scrollbar-track{
     background: var(--background);
 }
+
 ::-webkit-scrollbar-thumb{
     border-radius: 15px;
     background: var(--pink);
