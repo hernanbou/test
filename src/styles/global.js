@@ -14,7 +14,6 @@ export const GlobalStyle = createGlobalStyle`
         --shape: #ffffff;
     }
 
-
 ::-webkit-scrollbar{
     width: 15px;
 }
@@ -33,9 +32,11 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
 }
+
 html {
     scroll-behavior: smooth;
 }
+
 body, input, textarea, button, select {
     color: var(--text);
     font-family: 'Poppins', sans-serif;
@@ -44,15 +45,19 @@ body, input, textarea, button, select {
     background-color: var(--background-page);
     overflow-x: hidden;
 }
+
 h1, h2, h3, h4, h5, h6, strong {
     font-weight: 600;
 }
+
 button, select {
     cursor: pointer;
 }
+
 li{
     list-style: none;
 }
+
 a{
     text-decoration: none;
 }
