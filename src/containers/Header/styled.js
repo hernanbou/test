@@ -30,7 +30,6 @@ export const Logo = styled.div`
 `
 export const Content = styled.div`
   display: flex;
-  width: 20vw;
   align-items: center;
   justify-content: space-between;
   @media ${device.breakpoint} {

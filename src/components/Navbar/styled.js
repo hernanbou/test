@@ -25,7 +25,7 @@ export const Container = styled.ul`
 
     flex-flow: column nowrap;
     transform: ${(props) =>
-      props.open ? 'translateX(0)' : 'translateX(-100%)'};
+    props.open ? 'translateX(0)' : 'translateX(-100%)'};
     transition: all 0.3s;
   }
 
@@ -35,7 +35,7 @@ export const Container = styled.ul`
     font-weight: 500;
     line-height: 24px;
     transform: ${(props) =>
-      props.open ? 'translateX(0)' : 'translateX(-100%)'};
+    props.open ? 'translateX(0)' : 'translateX(-100%)'};
     transition: transform 0.5s;
     &:last-child {
       transition: transform 0.8s;
