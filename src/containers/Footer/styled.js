@@ -1,13 +1,13 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Container = styled.div`
-    background: #18181C;
-    height: 112px;
-    margin: 0;    
+  background: #18181c;
+  height: 112px;
+  margin: 0;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    font-weight: 300;
-`;
+  font-weight: 300;
+`

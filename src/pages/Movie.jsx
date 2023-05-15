@@ -1,11 +1,11 @@
-import SingleMovie from "../containers/SingleMovie";
+import SingleMovie from '../containers/SingleMovie'
 
 const Movie = () => {
-    return (
-        <>
-            <SingleMovie />
-        </>
-    );
+  return (
+    <>
+      <SingleMovie />
+    </>
+  )
 }
 
-export default Movie;
+export default Movie
